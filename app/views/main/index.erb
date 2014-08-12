@@ -1,0 +1,73 @@
+<%= javascript_include_tag 'ember_engine' %>
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ember.js • TodoMVC</title>
+    <%= stylesheet_link_tag 'main' %>
+</head>
+    <body>
+
+        <script type="text/x-handlebars" data-template-name="todos">
+
+            <section id="todoapp">
+                <header id="header">
+                    <h1>todos</h1>
+                    {{input type="text" id="new-todo" placeholder="What needs to be done?"
+              value=newTitle action="createTodo"}}
+                </header>
+
+                <section id="main">
+                    <ul id="todo-list">
+                      {{#each itemController="todo"}}
+                        <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
+                            {{#if isEditing}}
+                                <input class="edit">
+                            {{else}}
+                                {{input type="checkbox" checked=isCompleted class="toggle"}}
+                                <label {{action "editTodo" on="doubleClick"}}>{{title}}</label><button class="destroy"></button>
+                            {{/if}}
+                        </li>
+                      {{/each}}
+                    </ul>
+
+                    <input type="checkbox" id="toggle-all">
+                </section>
+
+                <footer id="footer">
+                    <span id="todo-count">
+                      <strong>{{remaining}}</strong> {{inflection}} left
+                    </span>
+                    <ul id="filters">
+                        <li>
+                            <a href="all" class="selected">All</a>
+                        </li>
+                        <li>
+                            <a href="active">Active</a>
+                        </li>
+                        <li>
+                            <a href="completed">Completed</a>
+                        </li>
+                    </ul>
+
+                    <button id="clear-completed">
+                        Clear completed (1)
+                    </button>
+                </footer>
+            </section>
+
+            <footer id="info">
+                <p>Double-click to edit a todo</p>
+            </footer>
+
+        </script>
+
+        <%= javascript_include_tag 'application.js' %>
+        <%= javascript_include_tag 'router.js' %>
+        <%= javascript_include_tag 'models/todo' %>
+        <%= javascript_include_tag 'controllers/todos_controller' %>
+        <%= javascript_include_tag 'controllers/todo_controller' %>
+
+    </body>
+</html>

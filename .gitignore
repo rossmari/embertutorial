@@ -1,0 +1,8 @@
+.idea
+.ruby-gemset
+.ruby-version
+db/sphinx
+log/
+public/
+tmp/
+config/database.yml
